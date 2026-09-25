@@ -11,6 +11,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = usePathname()
+  if (pathname === "/") return null
   const onLaunchpad = pathname.startsWith("/launch")
 
   return (
