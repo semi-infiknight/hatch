@@ -1,51 +1,49 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { HatchMark } from "@/components/hatch/mark";
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const links = [
-  { href: "/", label: "Nest" },
-  { href: "/terminal", label: "Nestcam" },
-] as const;
+  { href: "/#how", label: "How it works" },
+  { href: "/#collectibles", label: "Collectibles" },
+] as const
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  const pathname = usePathname()
+  const onLaunchpad = pathname.startsWith("/terminal") || pathname.startsWith("/launch")
 
   return (
-    <header className="border-b border-[#1C1915]/15 bg-[#F3EBDD] text-[#1C1915]">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-6 px-4 md:px-6">
+    <header className="sticky top-0 z-20 border-b border-[#3D2418]/20 bg-[#5C3317] text-[#FFF6E8]">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-2.5 focus-visible:ring-2 focus-visible:ring-[#1C1915]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] focus-visible:outline-none"
+          className="font-letter text-2xl leading-none tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#5C3317]"
         >
-          <HatchMark state="nest" className="size-7" />
-          <span className="font-spine text-sm tracking-[0.18em]">HATCH</span>
+          Hatch
         </Link>
-        <nav className="flex items-center gap-1" aria-label="Primary">
-          {links.map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-                className={`inline-flex h-8 items-center px-2.5 text-sm tracking-tight focus-visible:ring-2 focus-visible:ring-[#1C1915]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EBDD] focus-visible:outline-none ${
-                  active
-                    ? "text-[#C9A227]"
-                    : "text-[#1C1915]/70 hover:text-[#1C1915]"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+        <nav className="flex items-center gap-2" aria-label="Primary">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="hidden h-10 items-center px-3 text-sm text-[#FFF6E8]/80 hover:text-[#FFF6E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] sm:inline-flex"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href="/terminal?stock=TTWO&sku=VICE"
+            aria-current={onLaunchpad ? "page" : undefined}
+            className={`inline-flex h-10 items-center rounded-full px-4 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#5C3317] ${
+              onLaunchpad
+                ? "bg-[#FFF6E8] text-[#5C3317]"
+                : "bg-[#E24B3B] text-[#FFF6E8] hover:bg-[#c73d30]"
+            }`}
+          >
+            Launchpad
+          </Link>
         </nav>
       </div>
     </header>
-  );
+  )
 }

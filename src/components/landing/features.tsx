@@ -1,117 +1,76 @@
-import Link from "next/link";
+import Link from "next/link"
 
 const panels = [
   {
-    title: "Sold-comps tape",
-    lines: [
-      "14-day TWAP of public sales.",
-      "eBay sold, StockX, TCGPlayer, the issuer store.",
-    ],
+    title: "Price from real sales",
+    body: "The vault is priced from a 14-day average of items that actually sold, on eBay, StockX, TCGPlayer, and the company store.",
   },
   {
-    title: "Pip",
-    lines: ["The raise draws a line in the wrap."],
+    title: "Redeem the item",
+    body: "Burn tokens and request a sealed item from the vault. Shipping follows after the item is checked out.",
   },
   {
-    title: "Hatch",
-    lines: ["The first attested unit shows through. Still boxed."],
+    title: "Deposit an item",
+    body: "If you already hold the sealed product, send it in. You receive tokens against it.",
   },
   {
-    title: "Fledge",
-    lines: [
-      "Burn tokens. Take one sealed unit.",
-      "Collectors can also put a unit in and mint.",
-    ],
+    title: "Reserve stays for later",
+    body: "10% of the tokens stay with the vault. They can be sold only while the token price is above the value of the items. The money buys more items.",
   },
-] as const;
+] as const
 
-const spine = [
+const others = [
   { href: "/terminal?stock=NKE&sku=NKE_DROP", label: "Nike" },
   { href: "/terminal?stock=HAS&sku=HAS_SET", label: "Hasbro" },
   { href: "/terminal?stock=SONY&sku=SONY_HW", label: "Sony" },
   { href: "/terminal?stock=DIS&sku=DIS_DROP", label: "Disney" },
-] as const;
-
-const eggshell = "bg-[oklch(0.965_0.014_88)]";
-const ink = "text-[oklch(0.26_0.02_62)]";
-const inkQuiet = "text-[oklch(0.42_0.018_64)]";
-const hairline = "border-[oklch(0.26_0.02_62_/_0.14)]";
-
-const focusRing =
-  "focus-visible:ring-2 focus-visible:ring-[oklch(0.62_0.1_75)] focus-visible:ring-offset-2 focus-visible:ring-offset-[oklch(0.965_0.014_88)] focus-visible:outline-none";
+] as const
 
 export function Features() {
   return (
-    <section
-      id="features"
-      aria-labelledby="features-title"
-      className={`${eggshell} py-24`}
-    >
+    <section className="bg-[#F4D7B0] py-20 text-[#2A1A14]">
       <div className="mx-auto max-w-6xl px-6">
-        <h2
-          id="features-title"
-          className={`font-serif text-4xl tracking-tight ${ink} md:text-5xl`}
-        >
-          Nestcam
-        </h2>
-        <div className="mt-14 grid gap-px sm:grid-cols-2">
+        <h2 className="font-letter text-4xl md:text-5xl">On the launchpad</h2>
+        <ul className="mt-10 grid gap-4 md:grid-cols-2">
           {panels.map((panel) => (
-            <article
-              key={panel.title}
-              className={`flex flex-col gap-3 border ${hairline} p-8`}
-            >
-              <h3 className={`font-serif text-2xl tracking-tight ${ink}`}>
-                {panel.title}
-              </h3>
-              <div className={`flex max-w-prose flex-col gap-1 text-sm leading-6 ${inkQuiet}`}>
-                {panel.lines.map((line) => (
-                  <p key={line}>{line}</p>
-                ))}
-              </div>
-            </article>
+            <li key={panel.title} className="rounded-3xl bg-[#FFF6E8] p-6">
+              <h3 className="font-letter text-2xl">{panel.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#2A1A14]/80">{panel.body}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
-  );
+  )
 }
 
 export function ClosingCta() {
   return (
-    <section aria-labelledby="closing-title" className={`${eggshell} pb-24`}>
-      <div className="mx-auto flex max-w-6xl flex-col gap-12 px-6 md:flex-row md:items-end md:justify-between">
-        <div className="flex max-w-prose flex-col items-start gap-5">
-          <h2
-            id="closing-title"
-            className={`font-serif text-4xl tracking-tight ${ink} md:text-5xl`}
-          >
-            Watch VICE.
-          </h2>
-          <p className={`text-base leading-7 ${inkQuiet}`}>
-            VICE hatched from TTWO.
-          </p>
-          <Link
-            href="/terminal?stock=TTWO&sku=VICE"
-            className={`inline-flex h-11 items-center justify-center bg-[oklch(0.74_0.12_78)] px-5 text-sm font-medium text-[oklch(0.22_0.03_60)] motion-safe:transition-colors motion-safe:duration-150 hover:bg-[oklch(0.68_0.12_74)] ${focusRing}`}
-          >
-            Open the nestcam
-          </Link>
-        </div>
-        <nav aria-label="Other catalogs">
-          <ul className={`flex flex-col border-l ${hairline}`}>
-            {spine.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`inline-flex h-11 items-center px-4 text-sm ${inkQuiet} motion-safe:transition-colors motion-safe:duration-150 hover:text-[oklch(0.26_0.02_62)] ${focusRing}`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+    <section className="bg-[#1F7A78] py-20 text-[#FFF6E8]">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 className="font-letter text-4xl md:text-6xl">Open the launchpad</h2>
+        <p className="mt-4 max-w-lg text-lg leading-relaxed text-[#FFF6E8]/85">
+          Start with Take-Two and the sealed Vice City Collection box. The other four collectibles are on the same desk.
+        </p>
+        <Link
+          href="/terminal?stock=TTWO&sku=VICE"
+          className="mt-8 inline-flex h-12 items-center rounded-full bg-[#E24B3B] px-6 font-medium text-[#FFF6E8] hover:bg-[#c73d30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8]"
+        >
+          Launch Vice City Collection
+        </Link>
+        <ul className="mt-6 flex flex-wrap gap-3">
+          {others.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className="inline-flex h-10 items-center rounded-full bg-[#FFF6E8]/15 px-4 text-sm hover:bg-[#FFF6E8]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8]"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
-  );
+  )
 }

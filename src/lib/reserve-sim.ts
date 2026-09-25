@@ -1,4 +1,5 @@
 import { getSku, getStock, type Sku, type SkuId } from "@/lib/catalog"
+import { VICE_GRADUATION_USDC } from "@/lib/dbc"
 
 export interface CrankEvent {
   id: string
@@ -51,11 +52,11 @@ export interface ReserveState {
 }
 
 const RAISE_TARGET: Record<SkuId, number> = {
-  VICE: 800_000,
-  NKE_DROP: 250_000,
-  HAS_SET: 300_000,
-  SONY_HW: 200_000,
-  DIS_DROP: 180_000,
+  VICE: VICE_GRADUATION_USDC,
+  NKE_DROP: 120_000,
+  HAS_SET: 140_000,
+  SONY_HW: 100_000,
+  DIS_DROP: 90_000,
 }
 
 const SEED_UNITS: Record<SkuId, number> = {

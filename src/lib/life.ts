@@ -17,17 +17,21 @@ export function shellPct(state: LifeState): number {
   return 8
 }
 
-export function stateLine(state: LifeState): string {
-  if (state === "nest") return "Still in the nest."
-  if (state === "pip") return "A line in the wrap."
-  if (state === "hatch") return "First unit in."
-  return "Ready to fledge."
+export function plainStatus(state: LifeState): string {
+  if (state === "nest") return "Not launched"
+  if (state === "pip") return "Sale in progress"
+  if (state === "hatch") return "Items in the vault"
+  return "Ready to redeem"
 }
 
-export function fledgeWord(state: LifeState): "closed" | "open" {
-  return state === "fledge" ? "open" : "closed"
+export function stateLine(state: LifeState): string {
+  return plainStatus(state)
+}
+
+export function fledgeWord(state: LifeState): "Closed" | "Open" {
+  return state === "fledge" ? "Open" : "Closed"
 }
 
 export function unitsLine(units: number): string {
-  return units <= 0 ? "waiting first scan" : String(units)
+  return units <= 0 ? "Waiting for the first item" : String(units)
 }

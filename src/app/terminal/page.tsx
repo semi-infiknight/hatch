@@ -2,13 +2,12 @@
 
 import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-import { CatalogRow, HatchMark } from "@/components/hatch/mark"
 import { LaunchPanel } from "@/components/terminal/launch-panel"
 import { ReserveProvider, useReserve } from "@/components/terminal/reserve-provider"
 import { SkuPanel } from "@/components/terminal/sku-panel"
 import { StockPanel } from "@/components/terminal/stock-panel"
 import { VaultPanel } from "@/components/terminal/vault-panel"
-import { fledgeWord, lifeState, shellPct } from "@/lib/life"
+import { fledgeWord, lifeState, plainStatus } from "@/lib/life"
 import type { SkuId, StockId } from "@/lib/catalog"
 
 const STOCK_IDS = ["TTWO", "NKE", "HAS", "SONY", "DIS"] as const
@@ -27,21 +26,33 @@ function TerminalFrame() {
   const life = lifeState(state)
 
   return (
-    <div className="flex h-[calc(100svh-3.5rem)] min-h-[calc(100svh-3.5rem)] flex-col overflow-hidden bg-[#2A2723] text-[#F3EBDD] supports-[height:100dvh]:h-[calc(100dvh-3.5rem)] supports-[height:100dvh]:min-h-[calc(100dvh-3.5rem)]">
-      <header className="shrink-0 px-3 pt-3 pb-2">
-        <div className="relative flex origin-top-left items-center gap-4 bg-[#F3EBDD] px-4 py-3 text-[#1C1915] [transform:rotate(-0.4deg)]">
-          <span aria-hidden className="pointer-events-none absolute top-0 left-0 h-3 w-px bg-[#C9A227]" />
-          <span aria-hidden className="pointer-events-none absolute top-0 left-0 h-px w-3 bg-[#C9A227]" />
-          <HatchMark state={life} className="size-16 shrink-0 text-[#1C1915]" />
-          <div className="min-w-0 flex-1">
-            <CatalogRow k="NEST" v={stock.ticker} />
-            <CatalogRow k="EGG" v={sku.ticker} />
-            <CatalogRow k="STATE" v={life} />
-            <CatalogRow k="SHELL" v={`${shellPct(life)}%`} />
-            <CatalogRow k="FLEDGE" v={fledgeWord(life)} />
-            <p className="pt-1 text-right font-mono text-[11px] text-[#1C1915]/55">{state.phase}</p>
+    <div className="flex h-[calc(100svh-4rem)] min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-[#16343A] text-[#FFF6E8] supports-[height:100dvh]:h-[calc(100dvh-4rem)] supports-[height:100dvh]:min-h-[calc(100dvh-4rem)]">
+      <header className="shrink-0 border-b border-[#FFF6E8]/10 px-4 py-3">
+        <p className="font-spine text-[11px] tracking-[0.16em] text-[#F4D7B0] uppercase">Launchpad</p>
+        <dl className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div>
+            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Company</dt>
+            <dd className="font-mono text-sm">{stock.ticker}</dd>
           </div>
-        </div>
+          <div>
+            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Product</dt>
+            <dd className="font-mono text-sm">{sku.ticker}</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Status</dt>
+            <dd className="text-sm">{plainStatus(life)}</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Redeem</dt>
+            <dd className="text-sm">{fledgeWord(life)}</dd>
+          </div>
+          <div>
+            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Sale</dt>
+            <dd className="text-sm">
+              {state.phase === "live" ? "Filled" : state.phase === "filling" ? "Raising" : "Ready to start"}
+            </dd>
+          </div>
+        </dl>
       </header>
       <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-3 lg:grid-cols-3 lg:grid-rows-1">
         <div className="min-h-0 overflow-auto">

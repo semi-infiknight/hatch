@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
 import { formatUsd } from "@/lib/format"
-import { lifeState } from "@/lib/life"
+import { lifeState, plainStatus } from "@/lib/life"
 import { useReserve } from "./reserve-provider"
 
 const RAISE_MIN = 50_000
@@ -13,9 +13,9 @@ const RAISE_MAX = 5_000_000
 const RAISE_STEP = 50_000
 
 const FEE_CONTROLS = [
-  { index: 0, label: "Object", id: "fee-object" },
-  { index: 1, label: "Parent", id: "fee-equity" },
-  { index: 2, label: "Buffer", id: "fee-buffer" },
+  { index: 0, label: "More of the product", id: "fee-object" },
+  { index: 1, label: "Company stock", id: "fee-equity" },
+  { index: 2, label: "Cash for shipping", id: "fee-buffer" },
 ] as const
 
 const field =
@@ -79,7 +79,7 @@ export function LaunchPanel() {
       <div className="grid grid-cols-1 items-end gap-3 lg:grid-cols-[minmax(7rem,0.7fr)_minmax(9rem,0.8fr)_minmax(18rem,1.7fr)_minmax(12rem,0.9fr)]">
         <div className={field}>
           <label htmlFor="launch-ticker" className="text-[13px] font-medium">
-            Ticker
+            Token name
           </label>
           <Input
             id="launch-ticker"
@@ -94,7 +94,7 @@ export function LaunchPanel() {
         <div className={field}>
           <div className="flex items-baseline justify-between gap-2">
             <label htmlFor="launch-raise" className="text-[13px] font-medium">
-              Raise target
+              Sale size
             </label>
             <span className="font-mono text-[13px] tabular-nums">
               {formatUsd(state.raiseTarget)}
@@ -148,15 +148,17 @@ export function LaunchPanel() {
               )
             })}
           </div>
-          <p className="text-[13px]">10% of the edition stays in the shell.</p>
+          <p className="text-[13px]">10% of the tokens stay with the vault until the price is above the items.</p>
         </fieldset>
 
         <div className="flex flex-col items-start gap-2 lg:items-end">
           <div className="flex flex-col items-start gap-0.5 lg:items-end">
             <span className="font-spine font-sans text-[11px] uppercase tracking-[0.16em]">
-              {life}
+              {plainStatus(life)}
             </span>
-            <span className="font-mono text-[11px] text-[#C4B8A8]">{state.phase}</span>
+            <span className="font-mono text-[11px] text-[#C4B8A8]">
+              {state.phase === "live" ? "Sale filled" : state.phase === "filling" ? "Raising" : "Not started"}
+            </span>
           </div>
 
           {state.phase === "draft" ? (
@@ -165,7 +167,7 @@ export function LaunchPanel() {
               className="min-h-10 bg-[#F3EBDD] text-[#1C1915] hover:bg-[#E7EEF2]"
               onClick={() => launch()}
             >
-              Draw the pip
+              Start the sale
             </Button>
           ) : null}
 
@@ -193,7 +195,7 @@ export function LaunchPanel() {
           {state.phase === "live" ? (
             <div className="flex w-full flex-col items-start gap-2 lg:items-end">
               <p className="text-[13px]">
-                The line is in{" "}
+                Sale filled{" "}
                 <span className="font-mono tabular-nums">{formatUsd(state.raiseFilled)}</span>
               </p>
               <Button
@@ -202,7 +204,7 @@ export function LaunchPanel() {
                 className="min-h-10 text-[#F3EBDD] hover:bg-[#322E29] hover:text-[#F3EBDD]"
                 onClick={() => launch()}
               >
-                Seal it again
+                Start a new sale
               </Button>
             </div>
           ) : null}

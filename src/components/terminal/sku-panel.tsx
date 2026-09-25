@@ -66,14 +66,14 @@ export function SkuPanel() {
 
   return (
     <section
-      aria-label="Egg"
+      aria-label="Sealed product"
       className={`flex flex-col gap-2 border bg-[#2A2723] p-3 text-[13px] leading-tight text-[#F3EBDD] ${hairline}`}
     >
-      <p className="font-medium tracking-[0.16em] text-[#F3EBDD]/70 uppercase">EGG</p>
+      <p className="font-medium tracking-[0.16em] text-[#F3EBDD]/70 uppercase">Sealed product</p>
 
       <div
         role="radiogroup"
-        aria-label="SKU"
+        aria-label="Sealed products"
         className="flex flex-col gap-1"
         onKeyDown={moveSku}
       >
@@ -105,8 +105,8 @@ export function SkuPanel() {
         <div className="flex items-center gap-3">
           <HatchMark className="size-16 shrink-0" state={lifeState(state)} />
           <p className="font-mono text-[12px] leading-snug tracking-[0.16em] uppercase">
-            <span className="block">NEST {stock.ticker}</span>
-            <span className="block">EGG {sku.ticker}</span>
+            <span className="block">Company {stock.ticker}</span>
+            <span className="block">Product {sku.ticker}</span>
           </p>
         </div>
         <p className="font-medium tracking-tight">{sku.name}</p>
@@ -116,7 +116,7 @@ export function SkuPanel() {
           <dd className="text-right font-mono" onCopy={copyRaw(sku.retailUsd)}>
             {formatUsd(sku.retailUsd)}
           </dd>
-          <dt className="text-[#F3EBDD]/65">TWAP</dt>
+          <dt className="text-[#F3EBDD]/65">14-day sale average</dt>
           <dd className="text-right font-mono" onCopy={copyRaw(sku.twapUsd)}>
             {formatUsd(sku.twapUsd)}
           </dd>
@@ -130,9 +130,9 @@ export function SkuPanel() {
 
       <div className={`flex flex-col gap-1.5 border-t pt-2 ${hairline}`}>
         <div className="flex items-baseline justify-between gap-2">
-          <h2 className="font-medium tracking-[0.16em] text-[#F3EBDD]/70 uppercase">14-DAY TAPE</h2>
+          <h2 className="font-medium tracking-[0.16em] text-[#F3EBDD]/70 uppercase">Recent sales</h2>
           <p className="font-mono text-[#F3EBDD]">
-            <span className="text-[#F3EBDD]/65">Tape</span>{" "}
+            <span className="text-[#F3EBDD]/65">Updated</span>{" "}
             <span className="inline-block min-w-[3ch] text-right tabular-nums">{tapeSeconds}s</span>
           </p>
         </div>
@@ -142,7 +142,7 @@ export function SkuPanel() {
           ))}
         </ul>
         <table className={`w-full border-collapse border ${hairline}`}>
-          <caption className="sr-only">Sold comps for the 14-day TWAP</caption>
+          <caption className="sr-only">Recent sold prices and the 14-day average</caption>
           <thead>
             <tr className="text-[#F3EBDD]/65">
               <th scope="col" className={`${slipCell} text-left font-medium`}>
@@ -170,7 +170,7 @@ export function SkuPanel() {
           <tfoot>
             <tr>
               <th scope="row" className={`${slipCell} text-left font-medium`}>
-                TWAP
+                Average
               </th>
               <td className={`${slipCell} text-right font-mono`} onCopy={copyRaw(sku.twapUsd)}>
                 {formatUsd(sku.twapUsd)}

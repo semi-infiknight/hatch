@@ -1,114 +1,63 @@
-import { Fragment } from "react";
-import { Newsreader } from "next/font/google";
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-const eggshell = "bg-[oklch(0.965_0.014_88)]";
-const ink = "text-[oklch(0.26_0.02_62)]";
-const inkQuiet = "text-[oklch(0.42_0.018_64)]";
-const gold = "text-[#C9A227]";
-const rule = "bg-[oklch(0.26_0.02_62_/_0.14)]";
-
-const STATES = [
+const steps = [
   {
-    index: "01",
-    label: "NEST",
-    body: "Still in the wrap, on the parent shelf. The egg-unit sits in packing paper under the ticker.",
+    n: "01",
+    title: "Pick the company",
+    body: "Choose a stock that already trades on Solana. Take-Two, Nike, Hasbro, Sony, or Disney.",
   },
   {
-    index: "02",
-    label: "PIP",
-    body: "One hairline in the shrinkwrap. A collector notices the line.",
+    n: "02",
+    title: "Pick one sealed product",
+    body: "One real item from that company. A box, a pair, a console. Same item every time, so the vault can price it.",
   },
   {
-    index: "03",
-    label: "HATCH",
-    body: "Wrap off the face. The real SKU is visible, still boxed. First unit in the vault.",
+    n: "03",
+    title: "Open a sale",
+    body: "People buy the token with USDC. The sale ends when it raises enough to buy a real number of those items.",
   },
   {
-    index: "04",
-    label: "FLEDGE",
-    body: "The unit leaves the nestcam. The seal is broken on purpose.",
+    n: "04",
+    title: "Fill the vault",
+    body: "The raise buys the sealed product and stores it. The token is a claim on what is actually in the vault.",
   },
-] as const;
-
-const LOCKUP = [
-  ["NEST", "TTWO"],
-  ["EGG", "VICE"],
-] as const;
+  {
+    n: "05",
+    title: "Redeem or deposit",
+    body: "Burn tokens to take a sealed item out. Or send a sealed item in and receive tokens.",
+  },
+  {
+    n: "06",
+    title: "Fees keep buying",
+    body: "Trading fees buy more of the product, more of the company stock, and hold cash for shipping.",
+  },
+] as const
 
 export function Mechanism() {
   return (
-    <section
-      id="mechanism"
-      aria-labelledby="mechanism-title"
-      className={`${eggshell} py-24`}
-    >
+    <section id="how" className="bg-[#FFF6E8] py-20 text-[#2A1A14]">
       <div className="mx-auto max-w-6xl px-6">
-        <h2
-          id="mechanism-title"
-          className={`${newsreader.className} text-4xl font-medium tracking-tight ${ink} md:text-5xl`}
-        >
-          Four states.
-        </h2>
-        <p
-          className={`${newsreader.className} mt-5 max-w-prose text-lg leading-relaxed ${inkQuiet}`}
-        >
-          The seal is the promise. You don’t open it yet. You watch it.
+        <h2 className="font-letter text-4xl md:text-5xl">How it works</h2>
+        <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#2A1A14]/75">
+          Two things sit side by side. The company stock, and one sealed product
+          from that company. Hatch is the sale and the vault between them.
         </p>
-
-        <ol className={`mt-14 grid gap-px sm:grid-cols-2 xl:grid-cols-4 ${rule}`}>
-          {STATES.map((state) => (
-            <li key={state.label} className={`flex flex-col p-6 md:p-8 ${eggshell}`}>
-              <p
-                className={`font-spine text-sm tabular-nums tracking-[0.16em] ${gold}`}
-              >
-                {state.index}
-              </p>
-              <h3
-                className={`font-spine mt-4 text-base tracking-[0.2em] uppercase ${ink}`}
-              >
-                {state.label}
-              </h3>
-              <p
-                className={`${newsreader.className} mt-3 text-[1.0625rem] leading-relaxed ${inkQuiet}`}
-              >
-                {state.body}
-              </p>
+        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {steps.map((step) => (
+            <li
+              key={step.n}
+              className="flex flex-col rounded-3xl border border-[#5C3317]/15 bg-[#F4D7B0] p-6"
+            >
+              <span className="font-spine text-sm tracking-[0.16em] text-[#E24B3B]">
+                {step.n}
+              </span>
+              <h3 className="font-letter mt-3 text-2xl">{step.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#2A1A14]/80">{step.body}</p>
             </li>
           ))}
         </ol>
-
-        <div
-          aria-label="Parent and child"
-          className="mt-8 inline-grid grid-cols-[auto_auto] gap-x-10 gap-y-1"
-        >
-          {LOCKUP.map(([role, ticker]) => (
-            <Fragment key={role}>
-              <span
-                className={`font-spine text-xs tracking-[0.18em] uppercase ${ink}`}
-              >
-                {role}
-              </span>
-              <span
-                className={`font-spine text-xs tracking-[0.18em] uppercase ${inkQuiet}`}
-              >
-                {ticker}
-              </span>
-            </Fragment>
-          ))}
-        </div>
-
-        <p
-          className={`${newsreader.className} mt-10 max-w-prose text-lg leading-relaxed ${ink}`}
-        >
-          Curve on Meteora. Distribution through Sunrise. The nestcam is the desk.
+        <p className="mt-8 text-sm text-[#2A1A14]/70">
+          The sale uses a Meteora curve. After it fills, the token trades through Sunrise on Phantom, Jupiter, and Solflare.
         </p>
       </div>
     </section>
-  );
+  )
 }

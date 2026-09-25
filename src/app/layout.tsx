@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Hatch",
-  description: "Sealed until it’s alive. Alive because it’s sealed.",
+  description: "Hatch launches a token for one sealed product. The sale buys that product into a vault.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

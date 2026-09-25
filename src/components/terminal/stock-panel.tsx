@@ -25,10 +25,10 @@ export function StockPanel() {
 
   return (
     <section
-      aria-label="Nest"
+      aria-label="Company stock"
       className="flex flex-col gap-2 border border-[#3A3530] bg-[#2A2723] p-3 text-[#F3EBDD]"
     >
-      <h2 className={shelfLabel}>NEST</h2>
+      <h2 className={shelfLabel}>Company stock</h2>
 
       {stocks.length === 0 ? (
         <p className="text-[13px] text-[#C4B8A8]">No equities listed.</p>
@@ -93,7 +93,7 @@ export function StockPanel() {
 
       <div className="flex items-baseline justify-between gap-2">
         <div className="min-w-0">
-          <p className={shelfLabel}>EGG / NEST</p>
+          <p className={shelfLabel}>Product / company</p>
           <p className="truncate font-mono text-[13px] tabular-nums">
             {sku.ticker} / {stock.ticker}
           </p>
@@ -104,7 +104,7 @@ export function StockPanel() {
       </div>
 
       <div className="flex items-baseline justify-between gap-2">
-        <p className={shelfLabel}>PARENT IN THE SHELL</p>
+        <p className={shelfLabel}>Company stock bought</p>
         <p className="text-right font-mono text-[13px] tabular-nums">
           <span>{formatToken(state.parentShares)}</span>
           <span className="px-1 text-[#C4B8A8]">·</span>

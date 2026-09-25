@@ -36,7 +36,7 @@ import {
   type ReserveState,
 } from "@/lib/reserve-sim"
 
-const STORAGE_KEY = "brand-reserve:v1"
+const STORAGE_KEY = "hatch:v2"
 const SEEDED_LAUNCH_AGE_MS = 36 * 60 * 60 * 1000
 const RENDER_NOW = 1_758_844_800_000
 

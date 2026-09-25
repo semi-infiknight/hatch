@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useReserve } from "@/components/terminal/reserve-provider"
 import { formatCount, formatPct, formatToken, formatUsd } from "@/lib/format"
-import { fledgeWord, lifeState, shellPct, stateLine, unitsLine } from "@/lib/life"
+import { fledgeWord, lifeState, stateLine, unitsLine } from "@/lib/life"
 import { cn } from "@/lib/utils"
 
 function formatClock(at: number): string {
@@ -59,7 +59,6 @@ export function VaultPanel() {
   const [depositRaw, setDepositRaw] = useState("1")
 
   const life = lifeState(state)
-  const shell = shellPct(life)
   const live = state.phase === "live"
   const redeemUnits = wholeUnits(redeemRaw)
   const depositUnits = wholeUnits(depositRaw)
@@ -83,18 +82,18 @@ export function VaultPanel() {
 
   return (
     <section
-      aria-label="Nestcam"
+      aria-label="Vault"
       className="flex flex-col gap-3 rounded-md border border-[#C4A574]/40 bg-[#2A2723] p-3 text-[#F3EBDD]"
     >
       <dl className="grid grid-cols-2 gap-x-3 gap-y-2 border border-[#C4A574]/50 p-2">
-        <CatalogField label="STATE">{stateLine(life)}</CatalogField>
-        <CatalogField label="SHELL %">
-          <span className="font-mono tabular-nums">{shell}%</span>
+        <CatalogField label="Status">{stateLine(life)}</CatalogField>
+        <CatalogField label="Vault fill">
+          <span className="font-mono tabular-nums">{Math.round(collectedPct)}%</span>
         </CatalogField>
-        <CatalogField label="UNITS IN">
+        <CatalogField label="Items in">
           <span className="font-mono tabular-nums">{unitsLine(state.units)}</span>
         </CatalogField>
-        <CatalogField label="FLEDGE">
+        <CatalogField label="Redeem">
           <span className="font-mono tabular-nums">{fledgeWord(life)}</span>
         </CatalogField>
       </dl>
@@ -139,7 +138,7 @@ export function VaultPanel() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <h3 className={spine}>NESTCAM</h3>
+        <h3 className={spine}>Vault log</h3>
         <div ref={logRef} className="h-48">
           <ScrollArea className="h-full border border-[#C4A574]/40">
             {state.events.length === 0 ? (
@@ -187,10 +186,10 @@ export function VaultPanel() {
           redeem(tokensRequired)
         }}
       >
-        <h3 className={spine}>FLEDGE</h3>
+        <h3 className={spine}>Redeem</h3>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor={redeemId} className="text-[#F3EBDD]">
-            Units to fledge
+            Items to redeem
           </Label>
           <Input
             id={redeemId}
@@ -214,12 +213,12 @@ export function VaultPanel() {
           </span>
         </p>
         <Button type="submit" disabled={redeemDisabled} className="min-h-10 w-full">
-          Fledge one
+          Redeem items
         </Button>
         <ul className="flex flex-col" aria-label="Redeem queue">
           {state.redeemQueue.length === 0 ? (
             <li className="text-[13px] text-[#C4A574]">
-              Fledged units list here with a status.
+              Redeemed items show up here.
             </li>
           ) : (
             state.redeemQueue.map((order) => (
@@ -258,10 +257,10 @@ export function VaultPanel() {
           deposit(depositUnits)
         }}
       >
-        <h3 className={spine}>PLACE</h3>
+        <h3 className={spine}>Deposit</h3>
         <div className="flex flex-col gap-1.5">
           <Label htmlFor={depositId} className="text-[#F3EBDD]">
-            Units to place
+            Items to deposit
           </Label>
           <Input
             id={depositId}
@@ -290,12 +289,12 @@ export function VaultPanel() {
           disabled={depositDisabled}
           className="min-h-10 w-full border-[#C4A574]/60 bg-transparent text-[#F3EBDD] hover:bg-[#C4A574]/15 hover:text-[#F3EBDD]"
         >
-          Place a unit
+          Deposit items
         </Button>
       </form>
 
       <div className="flex flex-col gap-2 border-t border-[#C4A574]/40 pt-3">
-        <h3 className={spine}>SLEEVE</h3>
+        <h3 className={spine}>Reserve tokens</h3>
         <Button
           type="button"
           variant="secondary"
@@ -306,12 +305,12 @@ export function VaultPanel() {
             sellPremium()
           }}
         >
-          Sell the sleeve
+          Sell reserve tokens
         </Button>
         <p className="text-[13px] leading-snug text-[#C4A574]">
           {premium > 0
-            ? "Above the shell. Sleeve sales buy more sealed units."
-            : "Sleeve stays in the wrap."}
+            ? "Token price is above the items. Selling reserve tokens buys more sealed items."
+            : "Token price is at or below the items. Reserve tokens stay in the vault."}
         </p>
       </div>
     </section>
