@@ -14,11 +14,11 @@ export function SiteHeader() {
   const onLaunchpad = pathname.startsWith("/launch")
 
   return (
-    <header className="sticky top-0 z-20 border-b border-[#3D2418]/20 bg-[#5C3317] text-[#FFF6E8]">
+    <header className="sticky top-0 z-30 border-b border-white/10 bg-[#070707]/85 text-[#f5f5f5] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-6">
         <Link
           href="/"
-          className="font-letter text-2xl leading-none tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#5C3317]"
+          className="font-letter text-2xl leading-none tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5f5f5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070707]"
         >
           Hatch
         </Link>
@@ -27,7 +27,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="hidden h-10 items-center px-3 text-sm text-[#FFF6E8]/80 hover:text-[#FFF6E8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] sm:inline-flex"
+              className="hidden h-10 items-center px-3 text-sm text-[#f5f5f5]/70 hover:text-[#f5f5f5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5f5f5] sm:inline-flex"
             >
               {link.label}
             </Link>
@@ -35,10 +35,10 @@ export function SiteHeader() {
           <Link
             href="/launch"
             aria-current={onLaunchpad ? "page" : undefined}
-            className={`inline-flex h-10 items-center rounded-full px-4 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#5C3317] ${
+            className={`inline-flex h-10 items-center rounded-full px-4 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5f5f5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#070707] ${
               onLaunchpad
-                ? "bg-[#FFF6E8] text-[#5C3317]"
-                : "bg-[#E24B3B] text-[#FFF6E8] hover:bg-[#c73d30]"
+                ? "bg-[#f5f5f5] text-[#070707]"
+                : "bg-[#f5f5f5] text-[#070707] hover:bg-white"
             }`}
           >
             Launchpad

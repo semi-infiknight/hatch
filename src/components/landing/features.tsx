@@ -28,14 +28,14 @@ const others = [
 
 export function Features() {
   return (
-    <section className="bg-[#F4D7B0] py-20 text-[#2A1A14]">
+    <section className="border-t border-white/10 bg-[#0c0c0c] py-20 text-[#f5f5f5]">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-letter text-4xl md:text-5xl">On the launchpad</h2>
         <ul className="mt-10 grid gap-4 md:grid-cols-2">
           {panels.map((panel) => (
-            <li key={panel.title} className="rounded-3xl bg-[#FFF6E8] p-6">
+            <li key={panel.title} className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
               <h3 className="font-letter text-2xl">{panel.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#2A1A14]/80">{panel.body}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[#f5f5f5]/70">{panel.body}</p>
             </li>
           ))}
         </ul>
@@ -46,15 +46,15 @@ export function Features() {
 
 export function ClosingCta() {
   return (
-    <section className="bg-[#1F7A78] py-20 text-[#FFF6E8]">
+    <section className="border-t border-white/10 bg-[#070707] py-20 text-[#f5f5f5]">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-letter text-4xl md:text-6xl">Open the launchpad</h2>
-        <p className="mt-4 max-w-lg text-lg leading-relaxed text-[#FFF6E8]/85">
+        <p className="mt-4 max-w-lg text-lg leading-relaxed text-[#f5f5f5]/65">
           Pick a company, pick one of its sealed products, and launch it. Live sales show up on the home page.
         </p>
         <Link
           href="/launch"
-          className="mt-8 inline-flex h-12 items-center rounded-full bg-[#E24B3B] px-6 font-medium text-[#FFF6E8] hover:bg-[#c73d30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8]"
+          className="mt-8 inline-flex h-12 items-center rounded-full bg-[#f5f5f5] px-6 font-medium text-[#070707] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5f5f5]"
         >
           Open the launchpad
         </Link>
@@ -63,7 +63,7 @@ export function ClosingCta() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="inline-flex h-10 items-center rounded-full bg-[#FFF6E8]/15 px-4 text-sm hover:bg-[#FFF6E8]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8]"
+                className="inline-flex h-10 items-center rounded-full border border-white/15 px-4 text-sm text-[#f5f5f5]/80 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5f5f5]"
               >
                 {item.label}
               </Link>

@@ -157,18 +157,18 @@ export function LaunchForm() {
   }
 
   return (
-    <main className="min-h-[calc(100dvh-4rem)] bg-[#F4D7B0] text-[#2A1A14]">
+    <main className="min-h-[calc(100dvh-4rem)] bg-[#070707] text-[#f5f5f5]">
       <div className="mx-auto flex max-w-2xl flex-col gap-6 px-4 py-12">
         <div>
           <p className="font-spine text-xs tracking-[0.16em] text-[#E24B3B] uppercase">Launchpad</p>
           <h1 className="font-letter mt-2 text-5xl">Launch</h1>
-          <p className="mt-3 text-base leading-relaxed text-[#2A1A14]/80">
+          <p className="mt-3 text-base leading-relaxed text-[#f5f5f5]/70">
             Pick the company stock. Then pick one sealed product from that company. Launch opens a real Meteora sale on Solana. After it confirms, you go to that product’s desk and wait for the raise to fill.
           </p>
         </div>
 
         <form
-          className="flex flex-col gap-5 rounded-3xl border-[6px] border-[#5C3317] bg-[#FFF6E8] p-5"
+          className="flex flex-col gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-5"
           onSubmit={(event) => {
             event.preventDefault()
             void launch()
@@ -184,15 +184,15 @@ export function LaunchForm() {
                   onClick={() => pickStock(row.id)}
                   className={`min-h-12 rounded-xl border px-2 text-sm ${
                     row.id === stockId
-                      ? "border-[#E24B3B] bg-[#E24B3B] text-[#FFF6E8]"
-                      : "border-[#5C3317]/20 bg-white"
+                      ? "border-[#f5f5f5] bg-[#f5f5f5] text-[#070707]"
+                      : "border-white/15 bg-transparent text-[#f5f5f5]"
                   }`}
                 >
                   {row.ticker}
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-sm text-[#2A1A14]/70">{stock.line}</p>
+            <p className="mt-2 text-sm text-[#f5f5f5]/60">{stock.line}</p>
           </fieldset>
 
           <fieldset>
@@ -205,13 +205,13 @@ export function LaunchForm() {
                     onClick={() => pickSku(item.id)}
                     className={`flex w-full flex-col items-start rounded-xl border px-3 py-2 text-left ${
                       item.id === skuId
-                        ? "border-[#E24B3B] bg-[#F4D7B0]"
-                        : "border-[#5C3317]/20 bg-white"
+                        ? "border-[#f5f5f5] bg-white/10"
+                        : "border-white/15 bg-transparent"
                     }`}
                   >
                     <span className="font-mono text-sm">{item.ticker}</span>
                     <span className="text-sm">{item.name}</span>
-                    <span className="text-xs text-[#2A1A14]/60">{item.objectLabel}</span>
+                    <span className="text-xs text-[#f5f5f5]/50">{item.objectLabel}</span>
                   </button>
                 </li>
               ))}
@@ -224,7 +224,7 @@ export function LaunchForm() {
               value={name}
               maxLength={32}
               onChange={(event) => setName(event.target.value)}
-              className="h-12 rounded-xl border border-[#5C3317]/20 bg-white px-3 text-base"
+              className="h-12 rounded-xl border border-white/15 bg-transparent px-3 text-base text-[#f5f5f5]"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -233,48 +233,48 @@ export function LaunchForm() {
               value={symbol}
               maxLength={10}
               onChange={(event) => setSymbol(event.target.value.toUpperCase())}
-              className="h-12 rounded-xl border border-[#5C3317]/20 bg-white px-3 font-mono text-base uppercase"
+              className="h-12 rounded-xl border border-white/15 bg-transparent px-3 font-mono text-base text-[#f5f5f5] uppercase"
             />
           </label>
 
           <dl className="grid grid-cols-2 gap-3 text-sm">
             <div>
-              <dt className="text-[#2A1A14]/60">Raises</dt>
+              <dt className="text-[#f5f5f5]/50">Raises</dt>
               <dd className="font-mono">{formatUsd(raise, { compact: true })} USDC</dd>
             </div>
             <div>
-              <dt className="text-[#2A1A14]/60">Fee</dt>
+              <dt className="text-[#f5f5f5]/50">Fee</dt>
               <dd className="font-mono">{VICE_FEE_BPS / 100}%</dd>
             </div>
             <div>
-              <dt className="text-[#2A1A14]/60">Start price</dt>
+              <dt className="text-[#f5f5f5]/50">Start price</dt>
               <dd className="font-mono">${VICE_START_PRICE_USD.toFixed(2)}</dd>
             </div>
             <div>
-              <dt className="text-[#2A1A14]/60">End price</dt>
+              <dt className="text-[#f5f5f5]/50">End price</dt>
               <dd className="font-mono">${VICE_END_PRICE_USD.toFixed(2)}</dd>
             </div>
             <div>
-              <dt className="text-[#2A1A14]/60">Supply</dt>
+              <dt className="text-[#f5f5f5]/50">Supply</dt>
               <dd className="font-mono">{VICE_SUPPLY.toLocaleString()}</dd>
             </div>
             <div>
-              <dt className="text-[#2A1A14]/60">Product</dt>
+              <dt className="text-[#f5f5f5]/50">Product</dt>
               <dd>{sku.objectLabel}</dd>
             </div>
           </dl>
 
-          <p className="text-sm text-[#2A1A14]/70">
+          <p className="text-sm text-[#f5f5f5]/60">
             Your wallet pays the network fee and 0.001 SOL to open the curve. You keep the trading fees and the 10% that is not sold. After it launches, the desk waits for the raise to fill, then the vault can buy this product.
           </p>
 
           {wallet ? (
-            <p className="truncate font-mono text-xs text-[#2A1A14]/70">{wallet}</p>
+            <p className="truncate font-mono text-xs text-[#f5f5f5]/50">{wallet}</p>
           ) : (
             <button
               type="button"
               onClick={() => void connect()}
-              className="h-12 rounded-full border border-[#5C3317] text-base"
+              className="h-12 rounded-full border border-white/25 text-base"
             >
               Connect Phantom
             </button>
@@ -283,7 +283,7 @@ export function LaunchForm() {
           <button
             type="submit"
             disabled={busy}
-            className="h-12 rounded-full bg-[#E24B3B] text-base font-medium text-[#FFF6E8] disabled:opacity-60"
+            className="h-12 rounded-full bg-[#f5f5f5] text-base font-medium text-[#070707] disabled:opacity-60"
           >
             {busy ? "Confirm in Phantom…" : `Launch ${symbol}`}
           </button>

@@ -32,13 +32,13 @@ function TerminalFrame({
   const onChain = Boolean(pool)
 
   return (
-    <div className="flex h-[calc(100svh-4rem)] min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-[#16343A] text-[#FFF6E8] supports-[height:100dvh]:h-[calc(100dvh-4rem)] supports-[height:100dvh]:min-h-[calc(100dvh-4rem)]">
-      <header className="shrink-0 border-b border-[#FFF6E8]/10 px-4 py-3">
-        <p className="font-spine text-[11px] tracking-[0.16em] text-[#F4D7B0] uppercase">
+    <div className="flex h-[calc(100svh-4rem)] min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-[#070707] text-[#f5f5f5] supports-[height:100dvh]:h-[calc(100dvh-4rem)] supports-[height:100dvh]:min-h-[calc(100dvh-4rem)]">
+      <header className="shrink-0 border-b border-white/10 px-4 py-3">
+        <p className="font-spine text-[11px] tracking-[0.16em] text-[#f5f5f5]/70 uppercase">
           {onChain ? "Live curve" : "Desk"}
         </p>
         {onChain ? (
-          <p className="mt-1 truncate font-mono text-xs text-[#F4D7B0]/80">
+          <p className="mt-1 truncate font-mono text-xs text-[#f5f5f5]/55">
             Pool {pool}
             {mint ? ` · Token ${mint}` : ""}
             {tx ? (
@@ -59,23 +59,23 @@ function TerminalFrame({
         ) : null}
         <dl className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <div>
-            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Company</dt>
+            <dt className="text-[11px] tracking-[0.14em] text-[#f5f5f5]/45 uppercase">Company</dt>
             <dd className="font-mono text-sm">{stock.ticker}</dd>
           </div>
           <div>
-            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Product</dt>
+            <dt className="text-[11px] tracking-[0.14em] text-[#f5f5f5]/45 uppercase">Product</dt>
             <dd className="font-mono text-sm">{sku.ticker}</dd>
           </div>
           <div>
-            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Status</dt>
+            <dt className="text-[11px] tracking-[0.14em] text-[#f5f5f5]/45 uppercase">Status</dt>
             <dd className="text-sm">{plainStatus(life)}</dd>
           </div>
           <div>
-            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Redeem</dt>
+            <dt className="text-[11px] tracking-[0.14em] text-[#f5f5f5]/45 uppercase">Redeem</dt>
             <dd className="text-sm">{fledgeWord(life)}</dd>
           </div>
           <div>
-            <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Sale</dt>
+            <dt className="text-[11px] tracking-[0.14em] text-[#f5f5f5]/45 uppercase">Sale</dt>
             <dd className="text-sm">
               {onChain ? "On chain" : state.phase === "live" ? "Filled" : state.phase === "filling" ? "Raising" : "Not launched"}
             </dd>

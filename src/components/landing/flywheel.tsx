@@ -3,28 +3,28 @@ const parts = [
     pct: "50%",
     title: "More of the product",
     body: "Buys more sealed items for the vault.",
-    className: "bg-[#E24B3B] text-[#FFF6E8]",
+    className: "border border-white/10 bg-white/[0.04] text-[#f5f5f5]",
   },
   {
     pct: "30%",
     title: "Company stock",
     body: "Buys the same company’s stock on Solana.",
-    className: "bg-[#1F7A78] text-[#F4D7B0]",
+    className: "border border-white/10 bg-white/[0.04] text-[#f5f5f5]",
   },
   {
     pct: "20%",
     title: "Cash",
     body: "Held for shipping, storage, and redemptions.",
-    className: "bg-[#5C3317] text-[#FFF6E8]",
+    className: "border border-white/10 bg-white/[0.04] text-[#f5f5f5]",
   },
 ] as const
 
 export function Flywheel() {
   return (
-    <section id="fees" className="bg-[#FFF6E8] py-20 text-[#2A1A14]">
+    <section id="fees" className="border-t border-white/10 bg-[#070707] py-20 text-[#f5f5f5]">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-letter text-4xl md:text-5xl">Where trading fees go</h2>
-        <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#2A1A14]/75">
+        <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#f5f5f5]/65">
           Every trade publishes the same split before the sale starts.
         </p>
         <ul className="mt-10 grid gap-4 md:grid-cols-3">

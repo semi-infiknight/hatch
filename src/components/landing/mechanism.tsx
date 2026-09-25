@@ -33,10 +33,10 @@ const steps = [
 
 export function Mechanism() {
   return (
-    <section id="how" className="bg-[#FFF6E8] py-20 text-[#2A1A14]">
+    <section id="how" className="border-t border-white/10 bg-[#070707] py-20 text-[#f5f5f5]">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-letter text-4xl md:text-5xl">How it works</h2>
-        <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#2A1A14]/75">
+        <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#f5f5f5]/65">
           Two things sit side by side. The company stock, and one sealed product
           from that company. Hatch is the sale and the vault between them.
         </p>
@@ -44,17 +44,17 @@ export function Mechanism() {
           {steps.map((step) => (
             <li
               key={step.n}
-              className="flex flex-col rounded-3xl border border-[#5C3317]/15 bg-[#F4D7B0] p-6"
+              className="flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6"
             >
               <span className="font-spine text-sm tracking-[0.16em] text-[#E24B3B]">
                 {step.n}
               </span>
               <h3 className="font-letter mt-3 text-2xl">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#2A1A14]/80">{step.body}</p>
+              <p className="mt-2 text-sm leading-relaxed text-[#f5f5f5]/70">{step.body}</p>
             </li>
           ))}
         </ol>
-        <p className="mt-8 text-sm text-[#2A1A14]/70">
+        <p className="mt-8 text-sm text-[#f5f5f5]/50">
           The sale uses a Meteora curve. After it fills, the token trades through Sunrise on Phantom, Jupiter, and Solflare.
         </p>
       </div>

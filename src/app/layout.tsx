@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${spine.variable} ${letter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-background font-letter text-foreground">
+      <body className="flex min-h-full flex-col bg-[#070707] font-letter text-[#f5f5f5]">
         <SiteHeader />
         {children}
       </body>
