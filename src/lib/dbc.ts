@@ -30,6 +30,27 @@
 
 export const VICE_GRADUATION_USDC = 250_000
 
+export function graduationUsdForSku(skuId: string): number {
+  const map: Record<string, number> = {
+    VICE: VICE_GRADUATION_USDC,
+    GTA_VINYL: 140_000,
+    RDR_BOX: 160_000,
+    NKE_DROP: 120_000,
+    NKE_TRAVIS: 180_000,
+    NKE_OFFWHITE: 150_000,
+    HAS_SET: 140_000,
+    HAS_POKEMON: 180_000,
+    HAS_TRANSFORMERS: 110_000,
+    SONY_HW: 100_000,
+    SONY_PORTAL: 90_000,
+    SONY_PSP: 80_000,
+    DIS_DROP: 90_000,
+    DIS_LEGO: 160_000,
+    DIS_PIN: 80_000,
+  }
+  return map[skuId] ?? 90_000
+}
+
 /** Spot prices the raw sqrt fields encode, after the quote-threshold scale. */
 export const VICE_START_PRICE_USD = 0.129558378256
 export const VICE_END_PRICE_USD = 1.079653151656

@@ -21,8 +21,8 @@ export function Hero() {
           </p>
           <p className="mt-3 max-w-md text-base leading-relaxed text-[#2A1A14]/70">
             You start with a company stock that already trades on Solana, then
-            choose one real item that company sells. The first one is a sealed
-            Vice City Collection box from Take-Two.
+            choose one real item that company sells. Launch it. After it is live,
+            that product gets its own desk.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link

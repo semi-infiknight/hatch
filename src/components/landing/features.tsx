@@ -20,10 +20,10 @@ const panels = [
 ] as const
 
 const others = [
-  { href: "/terminal?stock=NKE&sku=NKE_DROP", label: "Nike" },
-  { href: "/terminal?stock=HAS&sku=HAS_SET", label: "Hasbro" },
-  { href: "/terminal?stock=SONY&sku=SONY_HW", label: "Sony" },
-  { href: "/terminal?stock=DIS&sku=DIS_DROP", label: "Disney" },
+  { href: "/launch?stock=NKE&sku=NKE_DROP", label: "Nike" },
+  { href: "/launch?stock=HAS&sku=HAS_SET", label: "Hasbro" },
+  { href: "/launch?stock=SONY&sku=SONY_HW", label: "Sony" },
+  { href: "/launch?stock=DIS&sku=DIS_DROP", label: "Disney" },
 ] as const
 
 export function Features() {
@@ -50,13 +50,13 @@ export function ClosingCta() {
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-letter text-4xl md:text-6xl">Open the launchpad</h2>
         <p className="mt-4 max-w-lg text-lg leading-relaxed text-[#FFF6E8]/85">
-          Start with Take-Two and the sealed Vice City Collection box. The other four collectibles are on the same desk.
+          Pick a company, pick one of its sealed products, and launch it. Live sales show up on the home page.
         </p>
         <Link
           href="/launch"
           className="mt-8 inline-flex h-12 items-center rounded-full bg-[#E24B3B] px-6 font-medium text-[#FFF6E8] hover:bg-[#c73d30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8]"
         >
-          Launch Vice City Collection
+          Open the launchpad
         </Link>
         <ul className="mt-6 flex flex-wrap gap-3">
           {others.map((item) => (

@@ -18,15 +18,15 @@ export function Pairs() {
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-letter text-4xl md:text-5xl">Collectibles</h2>
         <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#2A1A14]/75">
-          Each card is one company and one sealed product. Open any of them in the launchpad.
+          Each card is one company and one sealed product. Open any of them in the launchpad. After a sale is live, it appears at the top of the home page.
         </p>
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SKUS.map((sku, index) => {
             const stock = getStock(sku.stockId)
             return (
-              <li key={sku.id} className={sku.id === "VICE" ? "sm:col-span-2 lg:col-span-2" : ""}>
+              <li key={sku.id}>
                 <Link
-                  href={sku.id === "VICE" ? "/launch" : `/terminal?stock=${sku.stockId}&sku=${sku.id}`}
+                  href={`/launch?stock=${sku.stockId}&sku=${sku.id}`}
                   className="flex h-full flex-col justify-between rounded-3xl border-[6px] border-[#5C3317] bg-[#FFF6E8] p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E24B3B] focus-visible:ring-offset-2"
                 >
                   <div>
@@ -38,7 +38,7 @@ export function Pairs() {
                         <p className="font-letter text-3xl leading-none">{sku.ticker}</p>
                       </div>
                     </div>
-                    <p className="text-sm text-[#2A1A14]/60">{wraps[sku.id]}</p>
+                    <p className="text-sm text-[#2A1A14]/60">{wraps[sku.id] ?? sku.objectLabel}</p>
                     <h3 className="font-letter mt-1 text-2xl leading-tight">{sku.name}</h3>
                   </div>
                   <div className="mt-6 flex items-end justify-between gap-3">

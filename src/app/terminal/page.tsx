@@ -7,17 +7,15 @@ import { SkuPanel } from "@/components/terminal/sku-panel"
 import { StockPanel } from "@/components/terminal/stock-panel"
 import { VaultPanel } from "@/components/terminal/vault-panel"
 import { fledgeWord, lifeState, plainStatus } from "@/lib/life"
-import type { SkuId, StockId } from "@/lib/catalog"
+import { SKUS, type SkuId, type StockId } from "@/lib/catalog"
 
 const STOCK_IDS = ["TTWO", "NKE", "HAS", "SONY", "DIS"] as const
-const SKU_IDS = ["VICE", "NKE_DROP", "HAS_SET", "SONY_HW", "DIS_DROP"] as const
-
 function isStockId(value: string | null): value is StockId {
   return value !== null && (STOCK_IDS as readonly string[]).includes(value)
 }
 
 function isSkuId(value: string | null): value is SkuId {
-  return value !== null && (SKU_IDS as readonly string[]).includes(value)
+  return value !== null && SKUS.some((sku) => sku.id === value)
 }
 
 function TerminalFrame({

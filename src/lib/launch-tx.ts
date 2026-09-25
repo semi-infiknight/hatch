@@ -20,7 +20,7 @@ export function mainnetConnection() {
   return new Connection(MAINNET_RPC, "confirmed")
 }
 
-export async function buildViceLaunchTransaction(input: {
+export async function buildLaunchTransaction(input: {
   payer: PublicKey
   name: string
   symbol: string

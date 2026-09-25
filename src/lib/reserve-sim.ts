@@ -53,13 +53,23 @@ export interface ReserveState {
 
 const RAISE_TARGET: Record<SkuId, number> = {
   VICE: VICE_GRADUATION_USDC,
+  GTA_VINYL: 140_000,
+  RDR_BOX: 160_000,
   NKE_DROP: 120_000,
+  NKE_TRAVIS: 180_000,
+  NKE_OFFWHITE: 150_000,
   HAS_SET: 140_000,
+  HAS_POKEMON: 180_000,
+  HAS_TRANSFORMERS: 110_000,
   SONY_HW: 100_000,
+  SONY_PORTAL: 90_000,
+  SONY_PSP: 80_000,
   DIS_DROP: 90_000,
+  DIS_LEGO: 160_000,
+  DIS_PIN: 80_000,
 }
 
-const SEED_UNITS: Record<SkuId, number> = {
+const SEED_UNITS: Partial<Record<SkuId, number>> = {
   VICE: 186,
   NKE_DROP: 42,
   HAS_SET: 60,
@@ -67,7 +77,7 @@ const SEED_UNITS: Record<SkuId, number> = {
   DIS_DROP: 40,
 }
 
-const SEED_SHARES: Record<SkuId, number> = {
+const SEED_SHARES: Partial<Record<SkuId, number>> = {
   VICE: 420,
   NKE_DROP: 180,
   HAS_SET: 260,
@@ -75,7 +85,7 @@ const SEED_SHARES: Record<SkuId, number> = {
   DIS_DROP: 140,
 }
 
-const SEED_BUYS: Record<SkuId, [number, number, number]> = {
+const SEED_BUYS: Partial<Record<SkuId, [number, number, number]>> = {
   VICE: [12, 8, 6],
   NKE_DROP: [4, 3, 2],
   HAS_SET: [8, 6, 4],
@@ -131,44 +141,22 @@ function makeId(kind: string, at: number, n: number): string {
 
 function noun(skuId: SkuId, count: number): string {
   const plural = Math.abs(count) !== 1
-  switch (skuId) {
-    case "VICE":
-      return plural ? "sealed boxes" : "sealed box"
-    case "NKE_DROP":
-      return plural ? "sealed pairs" : "sealed pair"
-    case "HAS_SET":
-      return plural ? "booster boxes" : "booster box"
-    case "SONY_HW":
-      return plural ? "sealed consoles" : "sealed console"
-    case "DIS_DROP":
-      return plural ? "sealed statues" : "sealed statue"
-  }
+  const sku = getSku(skuId)
+  const one = sku.objectLabel.toLowerCase()
+  if (!plural) return one
+  if (one.endsWith("x")) return `${one}es`
+  if (one.endsWith("s")) return one
+  return `${one}s`
 }
 
 function buyLabel(skuId: SkuId, units: number, kind: BuyKind): string {
   const qty = `${formatCount(units)} ${noun(skuId, units)}`
-  switch (skuId) {
-    case "VICE":
-      return kind === "buy_primary"
-        ? `Bought ${qty} from the Rockstar store`
-        : `Bought ${qty} on StockX`
-    case "NKE_DROP":
-      return kind === "buy_primary"
-        ? `Bought ${qty} from SNKRS`
-        : `Bought ${qty} on StockX`
-    case "HAS_SET":
-      return kind === "buy_primary"
-        ? `Bought ${qty} on TCGPlayer`
-        : `Bought ${qty} on eBay`
-    case "SONY_HW":
-      return kind === "buy_primary"
-        ? `Bought ${qty} on StockX`
-        : `Bought ${qty} on eBay`
-    case "DIS_DROP":
-      return kind === "buy_primary"
-        ? `Bought ${qty} from shopDisney`
-        : `Bought ${qty} on eBay`
-  }
+  const sku = getSku(skuId)
+  const store = sku.oracleVenues[0] ?? "the store"
+  const secondary = sku.oracleVenues[1] ?? "eBay"
+  return kind === "buy_primary"
+    ? `Bought ${qty} from ${store}`
+    : `Bought ${qty} on ${secondary}`
 }
 
 function equityTicker(skuId: SkuId): string {
@@ -331,7 +319,7 @@ function runLiveSteps(state: ReserveState, from: number, steps: number, stockPri
 
 function seedEvents(sku: Sku, now: number): CrankEvent[] {
   const hour = 60 * 60 * 1000
-  const [primaryQty, secondaryQty, laterQty] = SEED_BUYS[sku.id]
+  const [primaryQty, secondaryQty, laterQty] = SEED_BUYS[sku.id] ?? [4, 3, 2]
   const feeUnits = sku.id === "VICE" || sku.id === "HAS_SET" ? 2 : 1
   const ticker = equityTicker(sku.id)
   const drafts: Omit<CrankEvent, "id">[] = [
@@ -424,7 +412,7 @@ export function createDraft(sku: Sku): ReserveState {
   return {
     skuId: sku.id,
     ticker: sku.ticker,
-    raiseTarget: RAISE_TARGET[sku.id],
+    raiseTarget: RAISE_TARGET[sku.id] ?? 90_000,
     raiseFilled: 0,
     feeSku: 0.5,
     feeEquity: 0.3,
@@ -454,9 +442,9 @@ export function seededLive(sku: Sku, now: number): ReserveState {
     raiseFilled: draft.raiseTarget,
     supply: LIVE_SUPPLY,
     reserveTokens: LIVE_RESERVE,
-    units: SEED_UNITS[sku.id],
+    units: SEED_UNITS[sku.id] ?? 20,
     usdcBuffer: Math.round(draft.raiseTarget * 0.08),
-    parentShares: SEED_SHARES[sku.id],
+    parentShares: SEED_SHARES[sku.id] ?? 80,
     twap: sku.twapUsd,
     events: seedEvents(sku, now),
     launchedAt: now - 1000 * 60 * 60 * 36,

@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react"
 import {
+  SKUS,
   STOCKS,
   getSku,
   getStock,
@@ -41,7 +42,7 @@ const SEEDED_LAUNCH_AGE_MS = 36 * 60 * 60 * 1000
 const RENDER_NOW = 1_758_844_800_000
 
 const STOCK_IDS: readonly StockId[] = ["TTWO", "NKE", "HAS", "SONY", "DIS"]
-const SKU_IDS: readonly SkuId[] = ["VICE", "NKE_DROP", "HAS_SET", "SONY_HW", "DIS_DROP"]
+const SKU_IDS: readonly SkuId[] = SKUS.map((sku) => sku.id)
 
 type Store = Partial<Record<SkuId, ReserveState>>
 
