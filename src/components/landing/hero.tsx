@@ -26,7 +26,7 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
-              href="/terminal?stock=TTWO&sku=VICE"
+              href="/launch"
               className="inline-flex h-12 items-center rounded-full bg-[#E24B3B] px-6 text-base font-medium text-[#FFF6E8] hover:bg-[#c73d30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E24B3B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F4D7B0]"
             >
               Open the launchpad

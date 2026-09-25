@@ -2,7 +2,6 @@
 
 import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-import { LaunchPanel } from "@/components/terminal/launch-panel"
 import { ReserveProvider, useReserve } from "@/components/terminal/reserve-provider"
 import { SkuPanel } from "@/components/terminal/sku-panel"
 import { StockPanel } from "@/components/terminal/stock-panel"
@@ -21,14 +20,45 @@ function isSkuId(value: string | null): value is SkuId {
   return value !== null && (SKU_IDS as readonly string[]).includes(value)
 }
 
-function TerminalFrame() {
+function TerminalFrame({
+  mint,
+  pool,
+  tx,
+}: {
+  mint: string | null
+  pool: string | null
+  tx: string | null
+}) {
   const { stock, sku, state } = useReserve()
   const life = lifeState(state)
+  const onChain = Boolean(pool)
 
   return (
     <div className="flex h-[calc(100svh-4rem)] min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-[#16343A] text-[#FFF6E8] supports-[height:100dvh]:h-[calc(100dvh-4rem)] supports-[height:100dvh]:min-h-[calc(100dvh-4rem)]">
       <header className="shrink-0 border-b border-[#FFF6E8]/10 px-4 py-3">
-        <p className="font-spine text-[11px] tracking-[0.16em] text-[#F4D7B0] uppercase">Launchpad</p>
+        <p className="font-spine text-[11px] tracking-[0.16em] text-[#F4D7B0] uppercase">
+          {onChain ? "Live curve" : "Desk"}
+        </p>
+        {onChain ? (
+          <p className="mt-1 truncate font-mono text-xs text-[#F4D7B0]/80">
+            Pool {pool}
+            {mint ? ` · Token ${mint}` : ""}
+            {tx ? (
+              <>
+                {" "}
+                ·{" "}
+                <a
+                  className="underline"
+                  href={`https://solscan.io/tx/${tx}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Transaction
+                </a>
+              </>
+            ) : null}
+          </p>
+        ) : null}
         <dl className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <div>
             <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Company</dt>
@@ -49,7 +79,7 @@ function TerminalFrame() {
           <div>
             <dt className="text-[11px] tracking-[0.14em] text-[#F4D7B0]/70 uppercase">Sale</dt>
             <dd className="text-sm">
-              {state.phase === "live" ? "Filled" : state.phase === "filling" ? "Raising" : "Ready to start"}
+              {onChain ? "On chain" : state.phase === "live" ? "Filled" : state.phase === "filling" ? "Raising" : "Not launched"}
             </dd>
           </div>
         </dl>
@@ -65,7 +95,6 @@ function TerminalFrame() {
           <VaultPanel />
         </div>
       </div>
-      <LaunchPanel />
     </div>
   )
 }
@@ -79,7 +108,11 @@ function TerminalDesk() {
 
   return (
     <ReserveProvider initialStock={initialStock} initialSku={initialSku}>
-      <TerminalFrame />
+      <TerminalFrame
+        mint={searchParams.get("mint")}
+        pool={searchParams.get("pool")}
+        tx={searchParams.get("tx")}
+      />
     </ReserveProvider>
   )
 }

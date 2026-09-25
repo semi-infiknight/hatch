@@ -53,7 +53,7 @@ export function ClosingCta() {
           Start with Take-Two and the sealed Vice City Collection box. The other four collectibles are on the same desk.
         </p>
         <Link
-          href="/terminal?stock=TTWO&sku=VICE"
+          href="/launch"
           className="mt-8 inline-flex h-12 items-center rounded-full bg-[#E24B3B] px-6 font-medium text-[#FFF6E8] hover:bg-[#c73d30] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8]"
         >
           Launch Vice City Collection

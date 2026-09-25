@@ -10,7 +10,7 @@ const links = [
 
 export function SiteHeader() {
   const pathname = usePathname()
-  const onLaunchpad = pathname.startsWith("/terminal") || pathname.startsWith("/launch")
+  const onLaunchpad = pathname.startsWith("/launch")
 
   return (
     <header className="sticky top-0 z-20 border-b border-[#3D2418]/20 bg-[#5C3317] text-[#FFF6E8]">
@@ -32,7 +32,7 @@ export function SiteHeader() {
             </Link>
           ))}
           <Link
-            href="/terminal?stock=TTWO&sku=VICE"
+            href="/launch"
             aria-current={onLaunchpad ? "page" : undefined}
             className={`inline-flex h-10 items-center rounded-full px-4 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF6E8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#5C3317] ${
               onLaunchpad

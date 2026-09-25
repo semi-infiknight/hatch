@@ -26,7 +26,7 @@ export function Pairs() {
             return (
               <li key={sku.id} className={sku.id === "VICE" ? "sm:col-span-2 lg:col-span-2" : ""}>
                 <Link
-                  href={`/terminal?stock=${sku.stockId}&sku=${sku.id}`}
+                  href={sku.id === "VICE" ? "/launch" : `/terminal?stock=${sku.stockId}&sku=${sku.id}`}
                   className="flex h-full flex-col justify-between rounded-3xl border-[6px] border-[#5C3317] bg-[#FFF6E8] p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E24B3B] focus-visible:ring-offset-2"
                 >
                   <div>

@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation"
+import { LaunchForm } from "@/components/launch/launch-form"
 
 export default function LaunchPage() {
-  redirect("/terminal?stock=TTWO&sku=VICE")
+  return <LaunchForm />
 }
